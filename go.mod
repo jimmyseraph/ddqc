@@ -1,4 +1,4 @@
-module github.com/jimmyseraph/ddmc
+module github.com/jimmyseraph/ddqc
 
 go 1.17
 
