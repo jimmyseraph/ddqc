@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/jimmyseraph/ddmc/api"
+	"github.com/jimmyseraph/ddqc/api"
 )
 
 const (
