@@ -91,7 +91,10 @@ func CallAddNewOrder(headers map[string][]string, body string, package_order str
 		body, time.Now().UnixMilli(), url.QueryEscape(package_order), url.QueryEscape("{\"key_onion\":\"C\"}"),
 	)
 	handler := easy_http.NewPost(AddNewOrderApi.Url, body)
-	handler.Headers = headers
+	for key, value := range headers {
+		handler.Headers[key] = value
+	}
+	// handler.Headers = headers
 	handler.Headers["content-type"] = []string{"application/x-www-form-urlencoded"}
 	resp, err := handler.Execute()
 	if err != nil {
@@ -229,7 +232,7 @@ func GetAvailableReservedTime(reserveTime []interface{}) (uint32, uint32) {
 func FormAddNewOrderPackageOrder(
 	productsIn []interface{},
 	parent_order_info interface{},
-	price, freight_discount_money, freight_money, order_freight string,
+	price, freight_discount_money, freight_money, order_freight interface{},
 	reserved_time_start, reserved_time_end uint32,
 ) string {
 	// fmt.Printf("--> %v", parent_order_info)

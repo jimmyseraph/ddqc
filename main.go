@@ -9,7 +9,7 @@ import (
 )
 
 const (
-	THREAD_NUM = 2 // 虚拟线程数量
+	THREAD_NUM = 1 // 虚拟线程数量
 )
 
 func main() {
@@ -127,6 +127,7 @@ func main() {
 
 	fmt.Println("========================= 4.开始调用创建新订单接口 =========================")
 	var check_order_response_json_data interface{}
+	// fmt.Printf("--> %v", checkOrderResponse)
 	json.Unmarshal([]byte(checkOrderResponse), &check_order_response_json_data)
 	order := check_order_response_json_data.(map[string]interface{})["data"].(map[string]interface{})["order"]
 	// 开始做协程
@@ -145,9 +146,9 @@ func main() {
 					productsIn.([]interface{}),
 					card_index_response_json_data.(map[string]interface{})["data"].(map[string]interface{})["parent_order_info"],
 					order.(map[string]interface{})["total_money"].(string),
-					order.(map[string]interface{})["freight_discount_money"].(string),
-					order.(map[string]interface{})["freight_money"].(string),
-					order.(map[string]interface{})["freight_real_money"].(string),
+					order.(map[string]interface{})["freight_discount_money"],
+					order.(map[string]interface{})["freight_money"],
+					order.(map[string]interface{})["freight_real_money"],
 					reserved_time_start, reserved_time_end,
 				)
 				addNewOrderResponse, err := api.CallAddNewOrder(headers, baseBody, packageOrder)
